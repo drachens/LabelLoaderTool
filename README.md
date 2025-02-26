@@ -1,5 +1,5 @@
 
-          LABEL SCALES LOADER
+#LABEL SCALES LOADER
 
 
 Descripción:
