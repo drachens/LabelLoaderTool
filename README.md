@@ -1,6 +1,6 @@
-=
+
           LABEL SCALES LOADER
-=
+
 
 Descripción:
 -------------
@@ -8,8 +8,8 @@ Este es un programa desarrollado con Spring Boot diseñado para cargar archivos 
 desde un directorio configurado y enviarlos a balanzas identificadas mediante direcciones IP.
 El programa coordina los siguientes componentes:
 
-  - LabelService: Recupera los archivos de etiquetas desde un directorio especificado.
-  - ScaleService: Obtiene la lista de direcciones IP de las balanzas a partir de la propiedad "ipScales".
+  - LabelService: Recupera los archivos de etiquetas desde un directorio especificado en el archivo de configuracion 'application.properties'.
+  - ScaleService: Obtiene la lista de direcciones IP de las balanzas a partir de la propiedad "ipScales" configurado en 'application.properties'.
   - SyncDataLoader: Realiza la carga de cada etiqueta en cada balanza a través de su IP.
   - LabelController: Orquesta la lógica de negocio, combinando la obtención de etiquetas y direcciones IP
     y delega la carga de etiquetas a las balanzas.
@@ -25,7 +25,7 @@ Características:
 Configuración:
 ---------------
 - Archivo de propiedades: application.properties
-  * directory = [ruta_del_directorio_con_las_etiquetas] (valor por defecto: "sas")
+  * directory = [ruta_del_directorio_con_las_etiquetas]
   * ipScales = [lista_de_IPs] (ejemplo: 127.0.0.1,192.168.0.2)
 
 Uso:
@@ -48,9 +48,7 @@ Logs:
 -----
 - El programa utiliza SLF4J y Logback para la gestión de logs.
 - Se pueden ajustar los niveles de log mediante la configuración en application.properties o en un archivo
-  logback-spring.xml.
-- Para evitar mensajes de depuración de paquetes internos (por ejemplo, sun.rmi), se recomienda elevar
-  el nivel de log o desactivarlos según se requiera.
+  logback.xml.
 
 Notas Adicionales:
 ------------------
