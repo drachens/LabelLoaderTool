@@ -61,4 +61,3 @@ Contact:
 ---------
 For more information or in case of issues, please contact the development team.
 
-========================================
