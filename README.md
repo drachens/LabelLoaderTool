@@ -2,64 +2,61 @@
 # LABEL SCALES LOADER
 
 
-Descripción:
+Description:
 -------------
-Este es un programa desarrollado con Spring Boot diseñado para cargar archivos de etiquetas (.lbl)
-desde un directorio configurado y enviarlos a balanzas identificadas mediante direcciones IP.
-El programa coordina los siguientes componentes:
+This is a program developed with Spring Boot that is designed to load label files (.lbl) from a configured directory and send them to scales identified by IP addresses. The program coordinates the following components:
 
-  - LabelService: Recupera los archivos de etiquetas desde un directorio especificado en el archivo de configuracion 'application.properties'.
-  - ScaleService: Obtiene la lista de direcciones IP de las balanzas a partir de la propiedad "ipScales" configurado en 'application.properties'.
-  - SyncDataLoader: Realiza la carga de cada etiqueta en cada balanza a través de su IP.
-  - LabelController: Orquesta la lógica de negocio, combinando la obtención de etiquetas y direcciones IP
-    y delega la carga de etiquetas a las balanzas.
+  - LabelService: Retrieves the label files from a directory specified in the application.properties configuration file.
+  - ScaleService: Obtains the list of scale IP addresses from the "ipScales" property set in application.properties.
+  - SyncDataLoader: Loads each label onto each scale via its IP address.
+  - LabelController: Orchestrates the business logic by combining the retrieval of labels and IP addresses, and delegates the label loading to the scales.
 
-Características:
+Features:
 -----------------
-- Lee archivos de etiquetas con extensión .lbl de un directorio configurado.
-- Obtiene direcciones IP de las balanzas a través de la propiedad "ipScales" (lista separada por comas).
-- Carga cada etiqueta en todas las balanzas disponibles.
-- Registra (log) el progreso y los errores durante el proceso.
-- Maneja excepciones y errores de forma controlada, registrándolos para su posterior análisis.
+  - Reads .lbl label files from a configured directory.
+  - Retrieves scale IP addresses through the "ipScales" property (comma-separated).
+  - Loads each label onto all available scales.
+  - Logs progress and errors during the process.
+  - Handles exceptions and errors in a controlled manner, logging them for further analysis.
 
-Configuración:
+Configuration:
 ---------------
-- Archivo de propiedades: application.properties
-  * directory = [ruta_del_directorio_con_las_etiquetas]
-  * ipScales = [lista_de_IPs] (ejemplo: 127.0.0.1,192.168.0.2)
+  - Properties file: application.properties
+    * directory = [path_to_label_directory] (for example: C:\Users\UserTest\LabelDirectory\)
+    * ipScales = [list_of_IPs] (for example: 127.0.0.1,192.168.0.2)
 
-Uso:
+Usage:
 ----
-1. Construir el JAR:
-   - Con Maven: ejecutar "mvn clean package" en la raíz del proyecto.
-   - Se generará un archivo JAR ejecutable en el directorio "target".
+1. Build the JAR:
+    - With Maven: run "mvn clean package" in the project root.
+    - An executable JAR file will be generated in the target directory.
 
-2. Ejecutar el JAR:
-   - Usar el siguiente comando:
+2. Run the JAR:
+   - Use the following command:
+     ```bash
      java -jar target/tu-nombre-de-aplicacion.jar
-
-3. Funcionamiento:
-   - Al iniciar, la aplicación cargará el contexto de Spring Boot y ejecutará el método loadLabels()
-     del LabelController (implementado a través de CommandLineRunner o similar).
-   - Se leerán los archivos de etiquetas y se enviarán a cada balanza configurada.
-   - Los logs se podrán consultar para verificar el éxito del proceso o identificar errores.
+     ```
+     
+3. How it works:
+    - Upon startup, the application will load the Spring Boot context and execute the loadLabels() method
+      of LabelController (implemented via CommandLineRunner or similar).
+    - It will read the label files and send them to each configured scale.
+    - Logs can be checked to verify the process's success or to identify errors.  
 
 Logs:
 -----
-- El programa utiliza SLF4J y Logback para la gestión de logs.
-- Se pueden ajustar los niveles de log mediante la configuración en application.properties o en un archivo
-  logback.xml.
+  - The program uses SLF4J and Logback for log management.
+  - Log levels can be adjusted via the configuration in application.properties or in a logback.xml file.
 
-Notas Adicionales:
+Additional Notes:
 ------------------
-- Asegúrate de que el directorio configurado en "directory" exista y contenga archivos con extensión .lbl.
-- Verifica que la propiedad "ipScales" contenga direcciones IP válidas, en formato IPv4, separadas por comas.
-- Si se detectan errores en la validación de IP, el servicio ScaleService lanzará una excepción y registrará
-  un mensaje de error.
+  - Make sure the directory configured in "directory" exists and contains files with the .lbl extension.
+  - Verify that the "ipScales" property contains valid IP addresses in IPv4 format, separated by commas.
+  - Ensure you have installed JDK version 17.
+  - If errors are detected during IP validation, the ScaleService will throw an exception and log an error message.
 
-Contacto:
+Contact:
 ---------
-Para más información o en caso de incidencias, por favor contactar al equipo de desarrollo o consultar la
-documentación interna del proyecto.
+For more information or in case of issues, please contact the development team.
 
 ========================================
