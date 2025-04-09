@@ -36,7 +36,7 @@ Usage:
 2. Run the JAR:
    - Use the following command:
      ```bash
-     java -jar target/tu-nombre-de-aplicacion.jar
+     java -jar target/application-name-example.jar
      ```
      
 3. How it works:
