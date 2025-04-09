@@ -22,8 +22,10 @@ Features:
 Configuration:
 ---------------
   - Properties file: application.properties
-    * directory = [path_to_label_directory] (for example: C:\Users\UserTest\LabelDirectory\)
-    * ipScales = [list_of_IPs] (for example: 127.0.0.1,192.168.0.2)
+    ```bash
+    directory = [path_to_label_directory] (for example: C:\Users\UserTest\LabelDirectory\)
+    ipScales = [list_of_IPs] (for example: 127.0.0.1,192.168.0.2)
+    ```
 
 Usage:
 ----
