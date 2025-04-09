@@ -16,6 +16,11 @@ public class SyncSDKImpl implements SyncSDKIntf {
     }
 
     @Override
+    public long SDK_ExecTaskW(int var1, int var2, int var3, String var4, TSDKOnProgressEvent var5, int var6) {
+        return 0;
+    }
+
+    @Override
     public long SDK_ExecTask(int var1, int var2, int var3, String var4,TSDKOnProgressEvent var5, int var6){
         return 0;
     }

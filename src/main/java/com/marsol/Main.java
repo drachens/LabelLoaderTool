@@ -14,6 +14,7 @@ import org.springframework.context.annotation.PropertySource;
 public class Main implements CommandLineRunner {
 
     Logger logger = LoggerFactory.getLogger(Main.class);
+
     @Autowired
     private LabelController labelController;
 
@@ -22,7 +23,7 @@ public class Main implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args){
         labelController.loadLabels();
         logger.info("Etiquetas cargadas.");
     }

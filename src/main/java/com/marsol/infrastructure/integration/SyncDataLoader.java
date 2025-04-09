@@ -4,17 +4,19 @@ import com.marsol.infrastructure.adapter.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 @Component
 public class SyncDataLoader {
-    private final SyncSDKIntf sync;
+    private SyncSDKIntf sync;
     private static final Logger logger = LoggerFactory.getLogger(SyncDataLoader.class);
     public SyncDataLoader() {
         this.sync = SyncManager.getInstance();
     }
+    public void Finalize(){
+        SyncManager.finalizeInstance();
+    }
 
-    public boolean loadFormatLabel(String filename, String ipString){
+    public boolean loadFormatLabel(String filename, String ipString, int user){
         long result;
         int ip = SyncSDKDefine.ipToLong(ipString);
         TSDKOnProgressEvent onProgress = (var1, var2, var3, var4) -> {
@@ -27,7 +29,7 @@ public class SyncDataLoader {
                 logger.error("[ERROR EN CARGA DE BALANZA] ErrorCode {}: {} en indice: {} de {} elementos.",var1,errorMessage,var2,var3);
             }
             if(var1 == 0){
-                logger.info("[CARGA DE BALANZA REALIZADA] Se han cargado todos los elementos ({}).",var3);
+                logger.info("[CARGA DE BALANZA REALIZADA] Se ha cargado el formato de etiqueta ({}) a balanza: {}.",var3,ipString);
             }
             if(var1 == -1){
                 logger.error("[ERROR EN CARGA DE BALANZA] Se ha producido un error inesperado durante la carga de la balanaza IP: {}",ipString);
@@ -35,7 +37,8 @@ public class SyncDataLoader {
         };
         try{
             //logger.info("Cargando Etiqueta {} en balanza {}",filename,ipString);
-            result = sync.SDK_ExecTaskA(ip,0,8192,filename,onProgress,111);
+            result = sync.SDK_ExecTaskA(ip,0,8192,filename,onProgress,user);
+
             sync.SDK_WaitForTask(result);
             //logger.info("Etiqueta cargada.");
             return true;
@@ -44,7 +47,7 @@ public class SyncDataLoader {
             return false;
         }
     }
-    public boolean loadBackgroundLabel(String filename, String ipString){
+    public boolean loadBackgroundLabel(String filename, String ipString, int user){
         long result;
         int ip = SyncSDKDefine.ipToLong(ipString);
         TSDKOnProgressEvent onProgress = (var1, var2, var3, var4) -> {
@@ -57,7 +60,7 @@ public class SyncDataLoader {
                 logger.error("[ERROR EN CARGA DE BALANZA] ErrorCode {}: {} en indice: {} de {} elementos.",var1,errorMessage,var2,var3);
             }
             if(var1 == 0){
-                logger.info("[CARGA DE BALANZA REALIZADA] Se han cargado todos los elementos ({}).",var3);
+                logger.info("[CARGA DE BALANZA REALIZADA] Se ha cargado el fondo de etiqueta ({}) a balanza: {}.",var3, ipString);
             }
             if(var1 == -1){
                 logger.error("[ERROR EN CARGA DE BALANZA] Se ha producido un error inesperado durante la carga de la balanaza IP: {}",ipString);
@@ -65,7 +68,7 @@ public class SyncDataLoader {
         };
         try{
             //logger.info("Cargando Etiqueta {} en balanza {}",filename,ipString);
-            result = sync.SDK_ExecTaskA(ip,0,8193,filename,onProgress,111);
+            result = sync.SDK_ExecTaskA(ip,0,8193,filename,onProgress,user);
             sync.SDK_WaitForTask(result);
             //logger.info("Etiqueta cargada.");
             return true;
@@ -74,7 +77,7 @@ public class SyncDataLoader {
             return false;
         }
     }
-    public boolean loadFileLabel(String filename, String ipString){
+    public boolean loadFileLabel(String filename, String ipString, int user){
         long result;
         int ip = SyncSDKDefine.ipToLong(ipString);
         TSDKOnProgressEvent onProgress = (var1, var2, var3, var4) -> {
@@ -87,7 +90,7 @@ public class SyncDataLoader {
                 logger.error("[ERROR EN CARGA DE BALANZA] ErrorCode {}: {} en indice: {} de {} elementos.",var1,errorMessage,var2,var3);
             }
             if(var1 == 0){
-                logger.info("[CARGA DE BALANZA REALIZADA] Se han cargado todos los elementos ({}).",var3);
+                logger.info("[CARGA DE BALANZA REALIZADA] Se ha cargado el archivo de etiqueta ({}) a balanza: {}.",var3, ipString);
             }
             if(var1 == -1){
                 logger.error("[ERROR EN CARGA DE BALANZA] Se ha producido un error inesperado durante la carga de la balanaza IP: {}",ipString);
@@ -95,7 +98,7 @@ public class SyncDataLoader {
         };
         try{
             //logger.info("Cargando Etiqueta {} en balanza {}",filename,ipString);
-            result = sync.SDK_ExecTaskA(ip,0,8194,filename,onProgress,111);
+            result = sync.SDK_ExecTaskA(ip,0,8194,filename,onProgress,user);
             sync.SDK_WaitForTask(result);
             //logger.info("Etiqueta cargada.");
             return true;

@@ -44,7 +44,7 @@ public class LabelServiceTest {
         RuntimeException thrown = assertThrows(
                 RuntimeException.class,
                 () -> labelService.getLabelsFiles());
-        assertEquals("No es un directorio.", thrown.getMessage());
+        assertTrue(thrown.getMessage().endsWith("no es un directorio."));
     }
 
     //Caso 2: La ruta asignada es un archivo y no un directorio.
@@ -59,7 +59,7 @@ public class LabelServiceTest {
         dirField.set(labelService, file.getAbsolutePath());
 
         RuntimeException thrown = assertThrows(RuntimeException.class, () -> labelService.getLabelsFiles());
-        assertEquals("No es un directorio.", thrown.getMessage());
+        assertTrue(thrown.getMessage().endsWith("no es un directorio."));
     }
 
     //Caso 3: Directorio vacio, sin archivos lbl

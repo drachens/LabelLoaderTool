@@ -30,6 +30,6 @@ public class AppConfig {
 
     @Bean
     LabelController labelController() {
-        return new LabelController(labelService(),syncDataLoader(),scaleService());
+        return new LabelController(labelService(),scaleService());
     }
 }

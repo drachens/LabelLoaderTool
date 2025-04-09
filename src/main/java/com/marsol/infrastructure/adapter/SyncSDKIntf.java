@@ -11,6 +11,8 @@ public interface SyncSDKIntf extends Library {
 
     long SDK_ExecTaskA(int var1, int var2, int var3, String var4, TSDKOnProgressEvent var5, int var6);
 
+    long SDK_ExecTaskW(int var1, int var2, int var3, String var4, TSDKOnProgressEvent var5, int var6);
+
     long SDK_ExecTask(int vat1, int var2, int var3, String var4, TSDKOnProgressEvent var5, int var6);
 
     void SDK_StopTask(long var1);

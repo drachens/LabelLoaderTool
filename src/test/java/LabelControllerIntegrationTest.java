@@ -33,10 +33,10 @@ public class LabelControllerIntegrationTest {
         labelController.loadLabels();
         // Con la configuración de test definida, LabelService devuelve 2 etiquetas y ScaleService 2 IPs.
         // Por lo tanto, se espera que se invoque loadLabel() 4 veces, una para cada combinación.
-        verify(syncDataLoader, times(1)).loadLabel("ruta/label1.lbl", "192.168.1.1");
-        verify(syncDataLoader, times(1)).loadLabel("ruta/label2.lbl", "192.168.1.1");
-        verify(syncDataLoader, times(1)).loadLabel("ruta/label1.lbl", "192.1.1.1");
-        verify(syncDataLoader, times(1)).loadLabel("ruta/label2.lbl", "192.1.1.1");
+        verify(syncDataLoader, times(1)).loadFileLabel("ruta/label1.lbl", "192.168.5.40");
+        verify(syncDataLoader, times(1)).loadFileLabel("ruta/label2.lbl", "192.168.5.40");
+        verify(syncDataLoader, times(1)).loadFileLabel("ruta/label1.lbl", "192.168.5.40");
+        verify(syncDataLoader, times(1)).loadFileLabel("ruta/label2.lbl", "192.168.5.40");
     }
 
     @TestConfiguration
@@ -66,7 +66,7 @@ public class LabelControllerIntegrationTest {
         public SyncDataLoader syncDataLoader(){
             return new SyncDataLoader(){
                 @Override
-                public boolean loadLabel(String label, String ip){
+                public boolean loadFileLabel(String label, String ip){
                     return true;
                 }
             };
